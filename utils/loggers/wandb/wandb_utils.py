@@ -42,7 +42,7 @@ def check_wandb_config_file(data_config_file):
 
 def check_wandb_dataset(data_file):
     '''
-
+    根据输入的数据集yaml文件返回一个字典
     :param data_file: E:\裂缝\yolo\myolov5\data\coco128.yaml，或者/mnt/yue/myolov5/data/bv.yaml
     :return: data_dict: {'path': '../datasets/coco128', 'train': 'E:\\裂缝\\yolo\\datasets\\coco128\\
              images\\train2017', 'val': 'E:\\裂缝\\yolo\\datasets\\coco128\\images\\train2017', 'test': None, 'nc':

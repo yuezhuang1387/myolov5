@@ -468,7 +468,7 @@ def check_font(font=FONT, progress=False):
 
 def check_dataset(data, autodownload=True):
     '''
-
+    根据输入的数据集yaml文件返回一个字典
     :param data: E:\裂缝\yolo\myolov5\data\coco128.yaml，或者/mnt/yue/myolov5/data/bv.yaml
     :param autodownload: 默认True
     :return: 返回字典
