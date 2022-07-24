@@ -453,7 +453,7 @@ def parse_model(d, ch=[3]):
 
 
 if __name__ == '__main__':
-    # 用于测试git
+    # 笔记本上，用于测试git
     parser = argparse.ArgumentParser()
     parser.add_argument('--cfg', type=str, default='yolov5s.yaml', help='model.yaml')
     parser.add_argument('--batch-size', type=int, default=10, help='total batch size for all GPUs')
