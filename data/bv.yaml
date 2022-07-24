@@ -1,0 +1,21 @@
+# YOLOv5 🚀 by Ultralytics, GPL-3.0 license
+# Example usage: python train.py --data bv.yaml
+# parent
+# ├── yolov5
+# └── datasets
+#     └── bv  ← downloads here (6 GB)
+
+
+# Train/val/test sets as 1) dir: path/to/imgs, 2) file: path/to/imgs.txt, or 3) list: [path/to/imgs1, path/to/imgs2, ..]
+path: ../datasets/bv  # dataset root dir
+train: train.txt  # train images (relative to 'path') 128 images
+val: val.txt  # val images (relative to 'path') 128 images
+test:  # test images (optional)
+
+# Classes
+nc: 12  # number of classes
+names: ['刻字锁', '刻字铆钉', '刻字搭扣', 'Logo压印', '刻字链接块', '锁扣头', '白标', '刻字拉链头', '刻字', '刻印皮标', '拉链头', '数字卡片']  # class names
+
+
+# Download script/URL (optional)
+#download: https://ultralytics.com/assets/coco128.zip
