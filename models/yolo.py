@@ -86,7 +86,7 @@ class Detect(nn.Module):
         # self.training为Module模块的参数，当设置model.train()时self.training为True，设置model.eval()时self.training为False
         # self.export: 一直为False
         z = []  # inference output
-        print(f'self.grid: {self.grid}')
+        # print(f'self.grid: {self.grid}')
         for i in range(self.nl):
             x[i] = self.m[i](x[i])  # torch.Size([N,85*3,H,W])
             bs, _, ny, nx = x[i].shape
