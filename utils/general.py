@@ -467,6 +467,24 @@ def check_font(font=FONT, progress=False):
 
 
 def check_dataset(data, autodownload=True):
+    '''
+
+    :param data: E:\裂缝\yolo\myolov5\data\coco128.yaml，或者/mnt/yue/myolov5/data/bv.yaml
+    :param autodownload: 默认True
+    :return: 返回字典
+    data_dict: {'path': '../datasets/coco128', 'train': 'E:\\裂缝\\yolo\\datasets\\coco128\\
+             images\\train2017', 'val': 'E:\\裂缝\\yolo\\datasets\\coco128\\images\\train2017', 'test': None, 'nc':
+              80, 'names': ['person', 'bicycle', 'car', 'motorcycle', 'airplane', 'bus', 'train', 'truck', 'boat',
+             'traffic light', 'fire hydrant', 'stop sign', 'parking meter', 'bench', 'bird', 'cat', 'dog', 'horse',
+              'sheep', 'cow', 'elephant', 'bear', 'zebra', 'giraffe', 'backpack', 'umbrella', 'handbag', 'tie', 'su
+             itcase', 'frisbee', 'skis', 'snowboard', 'sports ball', 'kite', 'baseball bat', 'baseball glove', 'ska
+             teboard', 'surfboard', 'tennis racket', 'bottle', 'wine glass', 'cup', 'fork', 'knife', 'spoon', 'bowl
+             ', 'banana', 'apple', 'sandwich', 'orange', 'broccoli', 'carrot', 'hot dog', 'pizza', 'donut', 'cake',
+              'chair', 'couch', 'potted plant', 'bed', 'dining table', 'toilet', 'tv', 'laptop', 'mouse', 'remote',
+              'keyboard', 'cell phone', 'microwave', 'oven', 'toaster', 'sink', 'refrigerator', 'book', 'clock', 'v
+             ase', 'scissors', 'teddy bear', 'hair drier', 'toothbrush'], 'download': 'https://ultralytics.com/asse
+             ts/coco128.zip'}
+    '''
     # Download, check and/or unzip dataset if not found locally
 
     # Download (optional)
@@ -489,7 +507,7 @@ def check_dataset(data, autodownload=True):
         data['names'] = [f'class{i}' for i in range(data['nc'])]  # default names
 
     # Resolve paths
-    path = Path(extract_dir or data.get('path') or '')  # optional 'path' default to '.'
+    path = Path(extract_dir or data.get('path') or '')  # optional 'path' default to '.' path:  '../datasets/bv'
     if not path.is_absolute():
         path = (ROOT / path).resolve()
     for k in 'train', 'val', 'test':

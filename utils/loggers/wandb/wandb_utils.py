@@ -41,6 +41,22 @@ def check_wandb_config_file(data_config_file):
 
 
 def check_wandb_dataset(data_file):
+    '''
+
+    :param data_file: E:\裂缝\yolo\myolov5\data\coco128.yaml，或者/mnt/yue/myolov5/data/bv.yaml
+    :return: data_dict: {'path': '../datasets/coco128', 'train': 'E:\\裂缝\\yolo\\datasets\\coco128\\
+             images\\train2017', 'val': 'E:\\裂缝\\yolo\\datasets\\coco128\\images\\train2017', 'test': None, 'nc':
+              80, 'names': ['person', 'bicycle', 'car', 'motorcycle', 'airplane', 'bus', 'train', 'truck', 'boat',
+             'traffic light', 'fire hydrant', 'stop sign', 'parking meter', 'bench', 'bird', 'cat', 'dog', 'horse',
+              'sheep', 'cow', 'elephant', 'bear', 'zebra', 'giraffe', 'backpack', 'umbrella', 'handbag', 'tie', 'su
+             itcase', 'frisbee', 'skis', 'snowboard', 'sports ball', 'kite', 'baseball bat', 'baseball glove', 'ska
+             teboard', 'surfboard', 'tennis racket', 'bottle', 'wine glass', 'cup', 'fork', 'knife', 'spoon', 'bowl
+             ', 'banana', 'apple', 'sandwich', 'orange', 'broccoli', 'carrot', 'hot dog', 'pizza', 'donut', 'cake',
+              'chair', 'couch', 'potted plant', 'bed', 'dining table', 'toilet', 'tv', 'laptop', 'mouse', 'remote',
+              'keyboard', 'cell phone', 'microwave', 'oven', 'toaster', 'sink', 'refrigerator', 'book', 'clock', 'v
+             ase', 'scissors', 'teddy bear', 'hair drier', 'toothbrush'], 'download': 'https://ultralytics.com/asse
+             ts/coco128.zip'}
+    '''
     is_trainset_wandb_artifact = False
     is_valset_wandb_artifact = False
     if check_file(data_file) and data_file.endswith('.yaml'):
@@ -53,6 +69,7 @@ def check_wandb_dataset(data_file):
     if is_trainset_wandb_artifact or is_valset_wandb_artifact:
         return data_dict
     else:
+        # 走这条路
         return check_dataset(data_file)
 
 
@@ -178,6 +195,18 @@ class WandbLogger():
                         self.data_dict = check_wandb_dataset(opt.data)
                 else:
                     self.data_dict = check_wandb_dataset(opt.data)
+                    #  self.data_dict: {'path': '../datasets/coco128', 'train': 'E:\\裂缝\\yolo\\datasets\\coco128\\
+                    # images\\train2017', 'val': 'E:\\裂缝\\yolo\\datasets\\coco128\\images\\train2017', 'test': None, 'nc':
+                    #  80, 'names': ['person', 'bicycle', 'car', 'motorcycle', 'airplane', 'bus', 'train', 'truck', 'boat',
+                    # 'traffic light', 'fire hydrant', 'stop sign', 'parking meter', 'bench', 'bird', 'cat', 'dog', 'horse',
+                    #  'sheep', 'cow', 'elephant', 'bear', 'zebra', 'giraffe', 'backpack', 'umbrella', 'handbag', 'tie', 'su
+                    # itcase', 'frisbee', 'skis', 'snowboard', 'sports ball', 'kite', 'baseball bat', 'baseball glove', 'ska
+                    # teboard', 'surfboard', 'tennis racket', 'bottle', 'wine glass', 'cup', 'fork', 'knife', 'spoon', 'bowl
+                    # ', 'banana', 'apple', 'sandwich', 'orange', 'broccoli', 'carrot', 'hot dog', 'pizza', 'donut', 'cake',
+                    #  'chair', 'couch', 'potted plant', 'bed', 'dining table', 'toilet', 'tv', 'laptop', 'mouse', 'remote',
+                    #  'keyboard', 'cell phone', 'microwave', 'oven', 'toaster', 'sink', 'refrigerator', 'book', 'clock', 'v
+                    # ase', 'scissors', 'teddy bear', 'hair drier', 'toothbrush'], 'download': 'https://ultralytics.com/asse
+                    # ts/coco128.zip'}
                     self.wandb_artifact_data_dict = self.wandb_artifact_data_dict or self.data_dict
 
                     # write data_dict to config. useful for resuming from artifacts. Do this only when not resuming.
