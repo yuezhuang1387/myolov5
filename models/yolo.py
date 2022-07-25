@@ -82,6 +82,12 @@ class Detect(nn.Module):
                     torch.Size([1, 3, 80, 80, 85])
                     torch.Size([1, 3, 40, 40, 85])
                     torch.Size([1, 3, 20, 20, 85])
+                eval时：(torch.cat(z, 1), x):
+                torch.cat(z, 1): shape: torch.Size([N, 全部预测先验框个数(3*H1*W1+3*H2*W2+3*H3*W3), 85])
+                                        85中0:2表示每个predict框实际中心坐标xy(映射到yolo模型实际输入图像尺寸上(640,640)或(672,另一个可被32整除))
+                                        85中2:4表示predict框实际wh(映射到yolo模型实际输入图像尺寸上(640,640)或(672,另一个可被32整除))
+                                        85张5表示predict框的置信度
+                                        85中5:85表示predict框对80个类别的预测概率
         '''
         # self.training为Module模块的参数，当设置model.train()时self.training为True，设置model.eval()时self.training为False
         # self.export: 一直为False
@@ -455,7 +461,7 @@ def parse_model(d, ch=[3]):
 if __name__ == '__main__':
     # 笔记本上，用于测试git
     parser = argparse.ArgumentParser()
-    parser.add_argument('--cfg', type=str, default='yolov5s.yaml', help='model.yaml')
+    parser.add_argument('--cfg', type=str, default='yolov5n.yaml', help='model.yaml')
     parser.add_argument('--batch-size', type=int, default=10, help='total batch size for all GPUs')
     parser.add_argument('--device', default='', help='cuda device, i.e. 0 or 0,1,2,3 or cpu')
     parser.add_argument('--profile', action='store_true', help='profile model speed')
@@ -469,6 +475,7 @@ if __name__ == '__main__':
     # Create model
     im = torch.rand(opt.batch_size, 3, 640, 640).to(device)
     model = Model(opt.cfg).to(device)
+    print(sum(x.numel() for x in model.parameters()) / 1000000)  # 参数量34M
     # Options
     # if opt.line_profile:  # profile layer by layer
     #     _ = model(im, profile=True)

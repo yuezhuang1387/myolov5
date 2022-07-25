@@ -906,7 +906,7 @@ def non_max_suppression(prediction,
                        85中2:4表示predict框实际wh(映射到yolo模型实际输入图像尺寸上(640,640)或(672,另一个可被32整除))
                        85张5表示predict框的置信度
                        85中5:85表示predict框对80个类别的预测概率
-    :param conf_thres: 0.001
+    :param conf_thres: 置信度阈值0.001
     :param iou_thres: 0.6
     :param classes:默认为None
     :param agnostic: single_cls，False

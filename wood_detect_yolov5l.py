@@ -116,6 +116,11 @@ class yolov5_v4_DetectionModel:
         # Apply NMS
         # pred = non_max_suppression(pred, self.conf_thres, self.iou_thres, classes=self.classes, agnostic=self.agnostic_nms)
         pred = non_max_suppression(pred, threshold, self.iou_thres, agnostic=self.agnostic_nms)
+        # pred为当前batchsize全部图像筛完后的预测框，len(pred)=batchsize
+        #              pred[i].shape：torch.Size([当前图像nms最终筛完的预测框数量(不超过300),6])
+        #              6中0:4表示预测框坐标(x1, y1, x2, y2)-均为实际尺寸坐标(映射到yolo模型实际输入图像尺寸上(640,640)或(672,另一个可被32整除)
+        #              6中4表示当前的预测概率值
+        #              6中5表示当前的预测类别(0~79)
         t2 = time_synchronized()
         det = pred[0]
         # Process detections
